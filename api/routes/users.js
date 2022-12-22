@@ -37,16 +37,16 @@ router.delete("/:id",verify,async (req,res)=>{
     }
 })
 //get
-router.get("/find/:id",async (req,res)=>{
+router.get("/find/:username",async (req,res)=>{
 
-        try{
-            const user = await User.findById(req.params.id);
-            const { password, ...info } = user._doc;
-            res.status(200).json(user); 
-        }catch(err){
-            res.status(500).json(err);
-        } 
-    })
+    try{
+        const user = await User.findOne({username:req.params.username});
+        const { password, ...info } = user._doc;
+        res.status(200).json(user); 
+    }catch(err){
+        res.status(500).json(err);
+    } 
+})
 //get all
 
 router.get("/",verify,async (req,res)=>{
