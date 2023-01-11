@@ -42,7 +42,8 @@ router.get("/find/:username",async (req,res)=>{
     try{
         const user = await User.findOne({username:req.params.username});
         const { password, ...info } = user._doc;
-        res.status(200).json(user); 
+        
+        res.status(200).json(info);  
     }catch(err){
         res.status(500).json(err);
     } 
@@ -51,6 +52,7 @@ router.get("/find/:username",async (req,res)=>{
 
 router.get("/",verify,async (req,res)=>{
     const query = req.query.new;
+    console.log(query);
     if(req.user.isAdmin){
         
         try{
@@ -64,6 +66,5 @@ router.get("/",verify,async (req,res)=>{
     }
 })
 
-//get user stats
 
 module.exports = router;
