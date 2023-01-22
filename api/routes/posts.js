@@ -31,6 +31,30 @@ router.put("/save/:id",async (req,res)=>{
     } 
 
 })
+//get blog
+router.get("/get/:id",async (req,res)=>{
+
+    try{
+        const post = await Post.findOne({_id:req.params.id});
+        res.status(200).json(post); 
+    }catch(err){
+        res.status(500).json(err);
+    } 
+
+})
+
+//published?
+router.put("/publish/:id",async (req,res)=>{
+
+    try{
+        const updatedPost = await Post.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
+        res.status(200).json(updatedPost); 
+    }catch(err){
+        res.status(500).json(err);
+    } 
+    
+})
+
 //retreive blogs
 router.get("/myworks",async (req,res)=>{
 
