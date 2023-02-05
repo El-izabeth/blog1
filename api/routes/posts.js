@@ -69,4 +69,14 @@ router.get("/myworks",async (req,res)=>{
     }
 
 })
+router.put("/like/:id",async (req,res)=>{
+
+    try{
+        const updatedPost = await Post.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true});
+        res.status(200).json(updatedPost); 
+    }catch(err){
+        res.status(500).json(err);
+    } 
+
+})
 module.exports = router;
